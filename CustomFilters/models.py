@@ -32,6 +32,7 @@ from file_app.triple_exposer import triple_exposer
 from file_app.invisible_filter import invisible_filter
 from file_app.duck_gif import custom_duck_gif
 from django.core.files.images import ImageFile
+from .remove_bg import remove_background
 # from .views import custom_filter_output
 import json
 # Create your models here.
@@ -61,6 +62,9 @@ def custom_filter_output(instance):
     action = instance.action
     src = cv2.imread(instance.input_file.path)
     img = src
+
+    if instance.remove_background:
+        img=remove_background(img)
 
     if action == 'FILTER':
         img2 = cv2.imread(os.path.join(os.path.abspath(

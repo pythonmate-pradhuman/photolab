@@ -23,10 +23,9 @@ class FileAdmin(admin.ModelAdmin):
 
     def Input_Image(self, obj):
         print(obj.file)
-        return mark_safe('<img src="http://127.0.0.1:8000/media/{url}" width="100px" height="auto" />'.format(
+        return mark_safe('<img src="/media/{url}" width="100px" height="auto" />'.format(
             url=obj.file
         ))
-
 
     def Output_Image(self, obj):
         print(obj.processed_image)
